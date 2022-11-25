@@ -24,6 +24,7 @@ export default class News {
 	async getNews() {
 		try {
 			const { data } = await axios.get(this._getURL());
+			console.log(this._getURL(), "from get news class ");
 			console.log(data);
 			this._totalPage = Math.ceil(data.totalResults / this._pageSize);
 			return {
@@ -77,7 +78,7 @@ export default class News {
 	}
 	// make url method
 	_getURL() {
-		let url = "/?";
+		let url = `/?`;
 		if (this._category) {
 			url += `category=${this._category}`;
 		}

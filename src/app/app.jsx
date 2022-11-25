@@ -53,8 +53,12 @@ class App extends React.Component {
 				this.setState({ data: data, isLoading: false });
 			})
 			.catch((error) => {
-				console.log(error);
-				alert("Something went wrong when getting news  ");
+				console.log(
+					error,
+					news._getURL(),
+					" error from getNews line 56 file name app.jsx"
+				);
+				// alert("Something went wrong when getting news  ");
 				this.setState({ isLoading: false });
 			});
 
@@ -116,7 +120,7 @@ class App extends React.Component {
 			})
 			.catch((error) => {
 				console.log(error);
-				alert("Something went wrong at gotopage();");
+				alert("Something went wrong at goto page();");
 				this.setState({ isLoading: false });
 			});
 	};

@@ -22,7 +22,7 @@ class Header extends Component {
 			<div className="my-4">
 				<p className="lead">
 					<span className="badge bg-info text-dark"> Api: </span>{" "}
-					https://newsapi.org/v2/top-headlines
+					{process.env.REACT_APP_NEWS_URL}
 				</p>
 				<h2 className="mb-3 fw-light text-center">News App Headline</h2>
 				<input
