@@ -4,9 +4,11 @@ const ResultInfo = (props) => {
 	return (
 		<div className="d-flex justify-content-between" ref={props.aboutResult}>
 			<p className="text-black-50">
-				About {props.totalResults} result found
+				About{" "}
+				<span className="badge bg-info text-dark">{props.totalResults}</span>{" "}
+				result found
 			</p>
-			<p className="text-black-50  ">
+			<p className="badge bg-info text-dark">
 				{props.currentPage} page of {props.totalPage} page
 			</p>
 		</div>

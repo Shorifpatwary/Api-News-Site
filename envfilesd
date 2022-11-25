@@ -1,0 +1,2 @@
+REACT_APP_NEWS_URL = https://newsapi.org/v2/top-headlines
+REACT_APP_NEWS_API_KEY = f1c827ccce0c4b7e9275f27ee92c202a

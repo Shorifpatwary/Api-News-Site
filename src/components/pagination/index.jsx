@@ -53,7 +53,10 @@ class Pagination extends Component {
 						>
 							{currentPage} of {totalPage} pages
 							<br />
-							<small> Double Tap to Edit </small>
+							<small className="badge bg-info text-darks">
+								{" "}
+								Double Tap to Edit{" "}
+							</small>
 						</p>
 					)}
 				</div>

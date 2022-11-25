@@ -4,7 +4,6 @@ class Header extends Component {
 	state = {
 		searchTerm: "",
 	};
-	// using ref
 
 	handleChange = (e) => {
 		this.setState({
@@ -21,7 +20,10 @@ class Header extends Component {
 		const { category } = this.props;
 		return (
 			<div className="my-4">
-				<p className="lead">Api:</p>
+				<p className="lead">
+					<span className="badge bg-info text-dark"> Api: </span>{" "}
+					https://newsapi.org/v2/top-headlines
+				</p>
 				<h2 className="mb-3 fw-light text-center">News App Headline</h2>
 				<input
 					// ref={this.inputFocus}

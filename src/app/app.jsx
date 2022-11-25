@@ -28,14 +28,14 @@ class App extends React.Component {
 			})
 			.catch((error) => {
 				console.log(error);
-				alert("Something went wrong at changecategory in the app component ");
+				alert("Something went wrong at change category in the app component ");
 				this.setState({ isLoading: false });
 			});
 	};
 	search = (searchTerm) => {
 		this.setState({ isLoading: true });
 		news
-			.changeCategory(searchTerm)
+			.search(searchTerm)
 			.then((data) => {
 				this.setState({ data, isLoading: false });
 			})
@@ -54,7 +54,7 @@ class App extends React.Component {
 			})
 			.catch((error) => {
 				console.log(error);
-				alert("Something went wrong ");
+				alert("Something went wrong when getting news  ");
 				this.setState({ isLoading: false });
 			});
 
