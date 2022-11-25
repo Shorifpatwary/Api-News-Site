@@ -58,7 +58,7 @@ class App extends React.Component {
 					news._getURL(),
 					" error from getNews line 56 file name app.jsx"
 				);
-				// alert("Something went wrong when getting news  ");
+				alert("Something went wrong when getting news  ");
 				this.setState({ isLoading: false });
 			});
 

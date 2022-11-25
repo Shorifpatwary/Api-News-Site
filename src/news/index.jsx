@@ -1,5 +1,3 @@
-import axios from "../utils/axios";
-
 export const newsCategory = {
 	technology: "technology",
 	science: "science",
@@ -23,9 +21,16 @@ export default class News {
 	// get new articles from API
 	async getNews() {
 		try {
-			const { data } = await axios.get(this._getURL());
-			console.log(this._getURL(), "from get news class ");
-			console.log(data);
+			const response = fetch(this._getURL(), {
+				method: "GET",
+				headers: {
+					"X-Api-key": process.env.REACT_APP_NEWS_API_KEY,
+				},
+			});
+			console.log(response, "response from ");
+			const data = await (await response).json();
+			console.log(this._getURL(), "__getURL() from get news class ");
+			console.log(data, "data from get news class ");
 			this._totalPage = Math.ceil(data.totalResults / this._pageSize);
 			return {
 				articles: data.articles,
@@ -78,7 +83,7 @@ export default class News {
 	}
 	// make url method
 	_getURL() {
-		let url = `/?`;
+		let url = `${process.env.REACT_APP_NEWS_URL}/?`;
 		if (this._category) {
 			url += `category=${this._category}`;
 		}
