@@ -1,6 +1,9 @@
-import React, { Component } from "react";
-import { newsCategory } from "../../news";
-class Header extends Component {
+import React from "react";
+import data from "../../data.json";
+const newsCategories = data.newsCategories;
+console.log(newsCategories, "newsCategories  ");
+
+class Header extends React.Component {
 	state = {
 		searchTerm: "",
 	};
@@ -17,7 +20,9 @@ class Header extends Component {
 	};
 
 	render() {
-		const { category } = this.props;
+		let { category } = this.props;
+		category = category ? category : ["top"];
+		console.log(category, "this . props ");
 		return (
 			<div className="my-4">
 				<p className="lead">
@@ -30,24 +35,24 @@ class Header extends Component {
 					ref={this.props.ref}
 					type="search"
 					className="form-control"
-					placeholder="Search something "
+					placeholder="Search Your favorite news "
 					value={this.state.searchTerm}
 					onChange={this.handleChange}
 					onKeyPress={this.handleKeyPress}
 				/>
 				<div className="my-4">
-					{newsCategory &&
-						Object.keys(newsCategory).map((item) => {
-							if (newsCategory[item] === category) {
+					{newsCategories &&
+						Object.keys(newsCategories).map((item) => {
+							if (category.includes(newsCategories[item])) {
 								return (
 									<button
 										key={item}
 										className="btn btn-sm btn-warning mr-2 mb-2 "
 										onClick={() =>
-											this.props.changeCategory(newsCategory[item])
+											this.props.changeCategory(newsCategories[item])
 										}
 									>
-										{newsCategory[item]}
+										{newsCategories[item]}
 									</button>
 								);
 							} else {
@@ -56,10 +61,10 @@ class Header extends Component {
 										key={item}
 										className="btn btn-sm btn-light mr-2 mb-2 "
 										onClick={() =>
-											this.props.changeCategory(newsCategory[item])
+											this.props.changeCategory(newsCategories[item])
 										}
 									>
-										{newsCategory[item]}
+										{newsCategories[item]}
 									</button>
 								);
 							}

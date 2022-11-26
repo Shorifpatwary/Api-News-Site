@@ -1,12 +1,12 @@
 import React from "react";
-import News, { newsCategory } from "../news";
+import News from "../news";
 import Header from "../components/header";
 import ResultInfo from "../components/resultInfo";
 import NewsList from "../components/newsList";
 import Pagination from "../components/pagination";
 import Loading from "../components/loading";
-
-const news = new News(newsCategory.technology);
+import data from "../data.json";
+const news = new News(data.newsCategories.top); // newsCategory.technology
 class App extends React.Component {
 	state = {
 		data: {},
@@ -28,7 +28,6 @@ class App extends React.Component {
 			})
 			.catch((error) => {
 				console.log(error);
-				alert("Something went wrong at change category in the app component ");
 				this.setState({ isLoading: false });
 			});
 	};
@@ -41,7 +40,7 @@ class App extends React.Component {
 			})
 			.catch((error) => {
 				console.log(error);
-				alert("Something went wrong at search() in the app component ");
+
 				this.setState({ isLoading: false });
 			});
 	};
@@ -58,12 +57,9 @@ class App extends React.Component {
 					news._getURL(),
 					" error from getNews line 56 file name app.jsx"
 				);
-				alert("Something went wrong when getting news  ");
+
 				this.setState({ isLoading: false });
 			});
-
-		console.log("this is a item ref list ");
-		console.log(this.itemRefList);
 	}
 	componentDidUpdate() {}
 	next = () => {
@@ -78,7 +74,7 @@ class App extends React.Component {
 				})
 				.catch((error) => {
 					console.log(error);
-					alert("Something went wrong ");
+
 					this.setState({ isLoading: false });
 				});
 		}
@@ -95,7 +91,7 @@ class App extends React.Component {
 				})
 				.catch((error) => {
 					console.log(error);
-					alert("Something went wrong ");
+
 					this.setState({ isLoading: false });
 				});
 		}
@@ -119,8 +115,6 @@ class App extends React.Component {
 				this.setState({ data, isLoading: false });
 			})
 			.catch((error) => {
-				console.log(error);
-				alert("Something went wrong at goto page();");
 				this.setState({ isLoading: false });
 			});
 	};
@@ -141,7 +135,7 @@ class App extends React.Component {
 			currentPage,
 			totalPage,
 		} = this.state.data;
-		console.log(this.state.data);
+		console.log(this.state.data, "state data from app.jsx file ");
 		return (
 			<div className="container">
 				<h2 className=" display-3 text-center"> News App </h2>

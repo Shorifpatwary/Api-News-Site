@@ -1,17 +1,8 @@
-export const newsCategory = {
-	technology: "technology",
-	science: "science",
-	business: "business",
-	entertainment: "entertainment",
-	general: "general",
-	health: "health",
-	sports: "sports",
-};
-const MAX_ITEM_PER_PAGE = 20;
+const MAX_ITEM_PER_PAGE = 10; // if your want to increase this amount you will have to increase page number also .
 
 export default class News {
-	constructor(category) {
-		this._category = category;
+	constructor(category = "top") {
+		this._category = [category];
 		this._searchTerm = "";
 		this._pageSize = MAX_ITEM_PER_PAGE;
 		this._currentPage = 1;
@@ -21,19 +12,14 @@ export default class News {
 	// get new articles from API
 	async getNews() {
 		try {
-			const response = fetch(this._getURL(), {
-				method: "GET",
-				headers: {
-					"X-Api-key": process.env.REACT_APP_NEWS_API_KEY,
-				},
-			});
-			console.log(response, "response from ");
+			const response = fetch(this._getURL());
+
 			const data = await (await response).json();
-			console.log(this._getURL(), "__getURL() from get news class ");
+
 			console.log(data, "data from get news class ");
 			this._totalPage = Math.ceil(data.totalResults / this._pageSize);
 			return {
-				articles: data.articles,
+				articles: data.results,
 				isNext: this._isNext(),
 				isPrev: this._isPrev(),
 				totalPage: this._totalPage,
@@ -53,7 +39,7 @@ export default class News {
 		}
 		return false;
 	}
-	// go to previus page when click the prev button in pagination
+	// go to previous page when click the prev button in pagination
 	prev() {
 		if (this._isPrev()) {
 			this._currentPage--;
@@ -72,7 +58,21 @@ export default class News {
 	}
 	//  change category in the parent state
 	changeCategory(category) {
-		this._category = category;
+		if (this._category.includes(category)) {
+			// if (this._category.length > 1) {
+			// 	const categoryIndex = this._category.indexOf(category);
+			// 	console.log(categoryIndex, "category index ");
+			// 	this._category.slice(categoryIndex, 1);
+			// } else {
+			// 	alert("minimum 1 category required ");
+			// }
+		} else {
+			if (this._category.length <= 5) {
+				this._category = [...this._category, category];
+			} else {
+				alert("This api doesn't allow to filter upto 5 categories ");
+			}
+		}
 		this._currentPage = 1;
 		return this.getNews();
 	}
@@ -83,16 +83,16 @@ export default class News {
 	}
 	// make url method
 	_getURL() {
-		let url = `${process.env.REACT_APP_NEWS_URL}/?`;
+		let url = `${process.env.REACT_APP_NEWS_URL}?apikey=${process.env.REACT_APP_NEWS_API_KEY}`;
 		if (this._category) {
-			url += `category=${this._category}`;
+			url += `&category=${this._category}`;
 		}
 		if (this._searchTerm) {
 			url += `&q=${this._searchTerm}`;
 		}
-		if (this._pageSize) {
-			url += `&pageSize=${this._pageSize}`;
-		}
+		// if (this._pageSize) {
+		// 	url += `&pageSize=${this._pageSize}`;
+		// }
 		if (this._currentPage) {
 			url += `&page=${this._currentPage}`;
 		}

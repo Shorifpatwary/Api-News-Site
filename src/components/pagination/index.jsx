@@ -54,8 +54,7 @@ class Pagination extends Component {
 							{currentPage} of {totalPage} pages
 							<br />
 							<small className="badge bg-info text-darks">
-								{" "}
-								Double Tap to Edit{" "}
+								Double Tap to Edit
 							</small>
 						</p>
 					)}
